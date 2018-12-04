@@ -1,0 +1,140 @@
+[root@server1 krb5kdc]# ldapsearch -h server1.northcentralus.cloudapp.azure.com -b "ou=people,dc=northcentralus,dc=cloudapp,dc=azure,dc=com" -x
+# extended LDIF
+#
+# LDAPv3
+# base <ou=people,dc=northcentralus,dc=cloudapp,dc=azure,dc=com> with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+
+# people, northcentralus.cloudapp.azure.com
+dn: ou=people,dc=northcentralus,dc=cloudapp,dc=azure,dc=com
+objectClass: organizationalUnit
+ou: people
+description: Generic people branch
+
+# admin, people, northcentralus.cloudapp.azure.com
+dn: uid=admin,ou=people,dc=northcentralus,dc=cloudapp,dc=azure,dc=com
+displayName: Administrator
+cn: Administrator
+givenName: Administrator
+sn: None
+initials: ADM
+mail: admin@
+uid: admin
+uidNumber: 50000
+gidNumber: 10000
+homeDirectory: /home/admin
+loginShell: /bin/bash
+gecos: Administrator,,,,
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+userPassword:: e1NTSEF9TkpoTEswTXFjYXhsNmpGMW9vektEZ0VpTmdTQzB3TTY=
+
+# user1, people, northcentralus.cloudapp.azure.com
+dn: uid=user1,ou=people,dc=northcentralus,dc=cloudapp,dc=azure,dc=com
+displayName: User 1
+cn: User 1
+givenName: User
+sn: One
+initials: US1
+mail: user1@
+uid: user1
+uidNumber: 50001
+gidNumber: 20000
+homeDirectory: /home/user1
+loginShell: /bin/bash
+gecos: User 1,,,,
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+userPassword:: e1NTSEF9bDVRYXpBSXAvMU8wRDc5L0psdHFwTWFscG9ORmUwdzM=
+
+# user2, people, northcentralus.cloudapp.azure.com
+dn: uid=user2,ou=people,dc=northcentralus,dc=cloudapp,dc=azure,dc=com
+displayName: User 2
+cn: User 2
+givenName: User
+sn: Two
+initials: US2
+mail: user2@
+uid: user2
+uidNumber: 50002
+gidNumber: 20000
+homeDirectory: /home/user2
+loginShell: /bin/bash
+gecos: User 2,,,,
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+userPassword:: e1NTSEF9K0prMnFSUFZ0bFVseGI0VU4vZjg2VldqNnJNQWlYMVY=
+
+# user3, people, northcentralus.cloudapp.azure.com
+dn: uid=user3,ou=people,dc=northcentralus,dc=cloudapp,dc=azure,dc=com
+displayName: User 3
+cn: User 3
+givenName: User
+sn: Three
+initials: US3
+mail: user3@
+uid: user3
+uidNumber: 50003
+gidNumber: 20000
+homeDirectory: /home/user3
+loginShell: /bin/bash
+gecos: User 3,,,,
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+userPassword:: e1NTSEF9bmdtYmtNV1dja3Z0NGZZVVprZFU1M2h4dFQvNGFVNjQ=
+
+# user4, people, northcentralus.cloudapp.azure.com
+dn: uid=user4,ou=people,dc=northcentralus,dc=cloudapp,dc=azure,dc=com
+displayName: User 4
+cn: User 4
+givenName: User
+sn: Four
+initials: US4
+mail: user4@
+uid: user4
+uidNumber: 50004
+gidNumber: 20000
+homeDirectory: /home/user4
+loginShell: /bin/bash
+gecos: User 4,,,,
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+userPassword:: e1NTSEF9cnNZQitCamFGdEh4NUdldURMMXV0U0VqN3RsUkREUlU=
+
+# search result
+search: 2
+result: 0 Success
+
+# numResponses: 7
+# numEntries: 6
+
+
+
+[root@server1 krb5kdc]# ldapsearch -h server1.northcentralus.cloudapp.azure.com -b "ou=machines,dc=northcentralus,dc=cloudapp,dc=azure,dc=com" -x
+# extended LDIF
+#
+# LDAPv3
+# base <ou=machines,dc=northcentralus,dc=cloudapp,dc=azure,dc=com> with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+
+# machines, northcentralus.cloudapp.azure.com
+dn: ou=machines,dc=northcentralus,dc=cloudapp,dc=azure,dc=com
+objectClass: organizationalUnit
+ou: machines
+description: Generic machines branch
+
+# search result
+search: 2
+result: 0 Success
+
+# numResponses: 2
+# numEntries: 1
