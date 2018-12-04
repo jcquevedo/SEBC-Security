@@ -1,0 +1,88 @@
+
+ [root@rakenchuy-dn3 jquevedo]# kinit admin@CHUY.COM
+Password for admin@CHUY.COM: 
+[root@rakenchuy-dn3 jquevedo]# klist
+Ticket cache: FILE:/tmp/krb5cc_0
+Default principal: admin@CHUY.COM
+
+Valid starting     Expires            Service principal
+12/03/18 23:10:10  12/04/18 23:10:10  krbtgt/CHUY.COM@CHUY.COM
+[root@rakenchuy-dn3 jquevedo]# 
+
+
+[root@server1 krb5kdc]# kinit admin@CHUY.COM
+Password for admin@CHUY.COM: 
+[root@server1 krb5kdc]# klist
+Ticket cache: FILE:/tmp/krb5cc_0
+Default principal: admin@CHUY.COM
+
+Valid starting     Expires            Service principal
+12/03/18 23:09:18  12/04/18 23:09:18  krbtgt/CHUY.COM@CHUY.COM
+
+
+
+[jquevedo@rakenchuy-mn0 ~]$ kinit cloudera-scm
+Password for cloudera-scm@CHUY.COM: 
+[jquevedo@rakenchuy-mn0 ~]$ klist
+Ticket cache: FILE:/tmp/krb5cc_1000
+Default principal: cloudera-scm@CHUY.COM
+
+Valid starting     Expires            Service principal
+12/03/18 23:53:35  12/04/18 23:53:35  krbtgt/CHUY.COM@CHUY.COM
+
+[root@server1 krb5kdc]# kadmin.local
+Authenticating as principal root/admin@CHUY.COM with password.
+kadmin.local:  listprincs
+K/M@CHUY.COM
+admin@CHUY.COM
+cloudera-scm@CHUY.COM
+kadmin/admin@CHUY.COM
+kadmin/changepw@CHUY.COM
+kadmin/server1.northcentralus.cloudapp.azure.com@CHUY.COM
+kiprop/server1.northcentralus.cloudapp.azure.com@CHUY.COM
+krbtgt/CHUY.COM@CHUY.COM
+user1@CHUY.COM
+user2@CHUY.COM
+user3@CHUY.COM
+user4@CHUY.COM
+kadmin.local:  
+
+[root@rakenchuy-dn3 jquevedo]# kinit user4
+Password for user4@CHUY.COM: 
+[root@rakenchuy-dn3 jquevedo]# klist
+Ticket cache: FILE:/tmp/krb5cc_0
+Default principal: user4@CHUY.COM
+
+Valid starting     Expires            Service principal
+12/03/18 23:40:15  12/04/18 23:40:15  krbtgt/CHUY.COM@CHUY.COM
+
+
+Habilitar Kerberos para rakenchuy
+Importar credenciales de KDC Account Manager Comando
+
+Estado  Finalizado   dic. 4, 12:26:50 AM  5.03s 
+Successfully imported KDC Account Manager credentials.
+
+
+HTTP/rakenchuy-dn0.northcentralus.cloudapp.azure.com@CHUY.COM	rakenchuy-dn0.northcentralus.cloudapp.azure.com
+	HTTP/rakenchuy-dn1.northcentralus.cloudapp.azure.com@CHUY.COM	rakenchuy-dn1.northcentralus.cloudapp.azure.com
+	HTTP/rakenchuy-dn2.northcentralus.cloudapp.azure.com@CHUY.COM	rakenchuy-dn2.northcentralus.cloudapp.azure.com
+	HTTP/rakenchuy-dn3.northcentralus.cloudapp.azure.com@CHUY.COM	rakenchuy-dn3.northcentralus.cloudapp.azure.com
+	HTTP/rakenchuy-mn0.northcentralus.cloudapp.azure.com@CHUY.COM	rakenchuy-mn0.northcentralus.cloudapp.azure.com
+	hdfs/rakenchuy-dn0.northcentralus.cloudapp.azure.com@CHUY.COM	rakenchuy-dn0.northcentralus.cloudapp.azure.com
+	hdfs/rakenchuy-dn1.northcentralus.cloudapp.azure.com@CHUY.COM	rakenchuy-dn1.northcentralus.cloudapp.azure.com
+	hdfs/rakenchuy-dn2.northcentralus.cloudapp.azure.com@CHUY.COM	rakenchuy-dn2.northcentralus.cloudapp.azure.com
+	hdfs/rakenchuy-dn3.northcentralus.cloudapp.azure.com@CHUY.COM	rakenchuy-dn3.northcentralus.cloudapp.azure.com
+	hdfs/rakenchuy-mn0.northcentralus.cloudapp.azure.com@CHUY.COM	rakenchuy-mn0.northcentralus.cloudapp.azure.com
+	hive/rakenchuy-mn0.northcentralus.cloudapp.azure.com@CHUY.COM	rakenchuy-mn0.northcentralus.cloudapp.azure.com
+	hue/rakenchuy-mn0.northcentralus.cloudapp.azure.com@CHUY.COM	rakenchuy-mn0.northcentralus.cloudapp.azure.com
+	mapred/rakenchuy-mn0.northcentralus.cloudapp.azure.com@CHUY.COM	rakenchuy-mn0.northcentralus.cloudapp.azure.com
+	oozie/rakenchuy-mn0.northcentralus.cloudapp.azure.com@CHUY.COM	rakenchuy-mn0.northcentralus.cloudapp.azure.com
+	sentry/rakenchuy-mn0.northcentralus.cloudapp.azure.com@CHUY.COM	rakenchuy-mn0.northcentralus.cloudapp.azure.com
+	yarn/rakenchuy-dn0.northcentralus.cloudapp.azure.com@CHUY.COM	rakenchuy-dn0.northcentralus.cloudapp.azure.com
+	yarn/rakenchuy-dn1.northcentralus.cloudapp.azure.com@CHUY.COM	rakenchuy-dn1.northcentralus.cloudapp.azure.com
+	yarn/rakenchuy-dn2.northcentralus.cloudapp.azure.com@CHUY.COM	rakenchuy-dn2.northcentralus.cloudapp.azure.com
+	yarn/rakenchuy-dn3.northcentralus.cloudapp.azure.com@CHUY.COM	rakenchuy-dn3.northcentralus.cloudapp.azure.com
+	yarn/rakenchuy-mn0.northcentralus.cloudapp.azure.com@CHUY.COM	rakenchuy-mn0.northcentralus.cloudapp.azure.com
+	zookeeper/rakenchuy-mn0.northcentralus.cloudapp.azure.com@CHUY.COM	rakenchuy-mn0.northcentralus.cloudapp.azure.com
+

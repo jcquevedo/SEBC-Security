@@ -1,1 +1,4 @@
-asd
+[root@server1 krb5kdc]# vi kadm5.acl 
+
+*/admin@CHUY.COM        *
+cloudera-scm@CHUY.COM admilc
