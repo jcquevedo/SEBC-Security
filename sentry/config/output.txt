@@ -1,1 +1,160 @@
-asd
+With Sentry you can give a little more granularity to the authorization topic, its really nice how you can create and assing roles and grant permissions over them to the different groups. I like the way you can limit how the user can interact with the object in cuestion. With this exercise I learned (in a basic way) how to limit such interactions.
+
+
+[jquevedo@rakenchuy-mn0 ~]$ klist
+Ticket cache: FILE:/tmp/krb5cc_1000
+Default principal: admin@CHUY.COM
+
+Valid starting     Expires            Service principal
+12/06/18 17:20:37  12/07/18 17:20:37  krbtgt/CHUY.COM@CHUY.COM
+[jquevedo@rakenchuy-mn0 ~]$ beeline
+Beeline version 1.1.0-cdh5.16.1 by Apache Hive
+beeline> !connect jdbc:hive2://rakenchuy-mn0.northcentralus.cloudapp.azure.com:10000/default;principal=hive/rakenchuy-mn0.northcentralus.cloudapp.azure.com@CHUY.COM;ssl=true;
+scan complete in 2ms
+Connecting to jdbc:hive2://rakenchuy-mn0.northcentralus.cloudapp.azure.com:10000/default;principal=hive/rakenchuy-mn0.northcentralus.cloudapp.azure.com@CHUY.COM;ssl=true;
+Connected to: Apache Hive (version 1.1.0-cdh5.16.1)
+Driver: Hive JDBC (version 1.1.0-cdh5.16.1)
+Transaction isolation: TRANSACTION_REPEATABLE_READ
+0: jdbc:hive2://rakenchuy-mn0.northcentralus.> 
+
+
+0: jdbc:hive2://rakenchuy-mn0.northcentralus.> CREATE table table1(
+. . . . . . . . . . . . . . . . . . . . . . .> NAME STRING,
+. . . . . . . . . . . . . . . . . . . . . . .> ADDRESS STRING,
+. . . . . . . . . . . . . . . . . . . . . . .> AGE INT
+. . . . . . . . . . . . . . . . . . . . . . .> );
+No rows affected (0.346 seconds)
+0: jdbc:hive2://rakenchuy-mn0.northcentralus.> show databases;
++----------------+--+
+| database_name  |
++----------------+--+
+| default        |
++----------------+--+
+1 row selected (0.103 seconds)
+0: jdbc:hive2://rakenchuy-mn0.northcentralus.> show tables;
++-----------+--+
+| tab_name  |
++-----------+--+
+| table1    |
++-----------+--+
+1 row selected (0.056 seconds)
+0: jdbc:hive2://rakenchuy-mn0.northcentralus.> 
+
+
+0: jdbc:hive2://rakenchuy-mn0.northcentralus.> CREATE table table2(
+. . . . . . . . . . . . . . . . . . . . . . .> HEIGHT STRING,
+. . . . . . . . . . . . . . . . . . . . . . .> WEIGHT STRING,
+. . . . . . . . . . . . . . . . . . . . . . .> AGE INT
+. . . . . . . . . . . . . . . . . . . . . . .> );
+No rows affected (0.109 seconds)
+0: jdbc:hive2://rakenchuy-mn0.northcentralus.> show tables;
++-----------+--+
+| tab_name  |
++-----------+--+
+| table1    |
+| table2    |
++-----------+--+
+2 rows selected (0.048 seconds)
+0: jdbc:hive2://rakenchuy-mn0.northcentralus.> 
+
+
+[jquevedo@rakenchuy-mn0 ~]$ hdfs dfs -put /home/jquevedo/Libro1.csv /tmp/Libro1.csv
+[jquevedo@rakenchuy-mn0 ~]$ hdfs dfs -put /home/jquevedo/Libro2.csv /tmp/Libro2.csv
+
+
+0: jdbc:hive2://rakenchuy-mn0.northcentralus.> LOAD DATA INPATH '/tmp/Libro1.csv' OVERWRITE INTO TABLE table1;
+No rows affected (0.613 seconds)
+0: jdbc:hive2://rakenchuy-mn0.northcentralus.> LOAD DATA INPATH '/tmp/Libro2.csv' OVERWRITE INTO TABLE table2;
+No rows affected (0.406 seconds)
+0: jdbc:hive2://rakenchuy-mn0.northcentralus.> 
+
+
+
+0: jdbc:hive2://rakenchuy-mn0.northcentralus.> select * from table1;
++--------------------------------+-----------------+-------------+--+
+|          table1.name           | table1.address  | table1.age  |
++--------------------------------+-----------------+-------------+--+
+| Lot Navarro,Monterrey 123,46   | NULL            | NULL        |
+| Jesus Quevedo,Culiacan 312,36  | NULL            | NULL        |
++--------------------------------+-----------------+-------------+--+
+2 rows selected (0.372 seconds)
+0: jdbc:hive2://rakenchuy-mn0.northcentralus.> select * from table2;
++-----------------+----------------+-------------+--+
+|  table2.height  | table2.weight  | table2.age  |
++-----------------+----------------+-------------+--+
+| 1.78m,95kg,46   | NULL           | NULL        |
+| 1.84m,110kg,36  | NULL           | NULL        |
++-----------------+----------------+-------------+--+
+2 rows selected (0.175 seconds)
+0: jdbc:hive2://rakenchuy-mn0.northcentralus.> 
+
+
+0: jdbc:hive2://rakenchuy-mn0.northcentralus.> grant all on table1 to role managers;
+No rows affected (0.259 seconds)
+0: jdbc:hive2://rakenchuy-mn0.northcentralus.> grant select on table2 to role analysts;
+No rows affected (0.162 seconds)
+0: jdbc:hive2://rakenchuy-mn0.northcentralus.> grant all on database default to role admin;
+No rows affected (0.178 seconds)
+0: jdbc:hive2://rakenchuy-mn0.northcentralus.> grant role admin to group admins;
+No rows affected (0.227 seconds)
+0: jdbc:hive2://rakenchuy-mn0.northcentralus.> grant role managers to group managers;
+No rows affected (0.144 seconds)
+0: jdbc:hive2://rakenchuy-mn0.northcentralus.> grant role analysts to group analysts;
+No rows affected (0.158 seconds)
+0: jdbc:hive2://rakenchuy-mn0.northcentralus.>
+
+[jquevedo@rakenchuy-mn0 ~]$ kinit user1
+Password for user1@CHUY.COM: 
+[jquevedo@rakenchuy-mn0 ~]$ beeline
+Beeline version 1.1.0-cdh5.16.1 by Apache Hive
+beeline> !connect jdbc:hive2://rakenchuy-mn0.northcentralus.cloudapp.azure.com:10000/default;principal=hive/rakenchuy-mn0.northcentralus.cloudapp.azure.com@CHUY.COM;ssl=true;
+scan complete in 2ms
+Connecting to jdbc:hive2://rakenchuy-mn0.northcentralus.cloudapp.azure.com:10000/default;principal=hive/rakenchuy-mn0.northcentralus.cloudapp.azure.com@CHUY.COM;ssl=true;
+Connected to: Apache Hive (version 1.1.0-cdh5.16.1)
+Driver: Hive JDBC (version 1.1.0-cdh5.16.1)
+Transaction isolation: TRANSACTION_REPEATABLE_READ
+0: jdbc:hive2://rakenchuy-mn0.northcentralus.> select * from table1;
++--------------------------------+-----------------+-------------+--+
+|          table1.name           | table1.address  | table1.age  |
++--------------------------------+-----------------+-------------+--+
+| Lot Navarro,Monterrey 123,46   | NULL            | NULL        |
+| Jesus Quevedo,Culiacan 312,36  | NULL            | NULL        |
++--------------------------------+-----------------+-------------+--+
+2 rows selected (0.421 seconds)
+0: jdbc:hive2://rakenchuy-mn0.northcentralus.> select * from table2;
+Error: Error while compiling statement: FAILED: SemanticException No valid privileges
+ User user1 does not have privileges for QUERY
+ The required privileges: Server=server1->Db=default->Table=table2->Column=height->action=select->grantOption=false; (state=42000,code=40000)
+0: jdbc:hive2://rakenchuy-mn0.northcentralus.> 
+
+
+[jquevedo@rakenchuy-mn0 ~]$ kinit user2
+Password for user2@CHUY.COM: 
+[jquevedo@rakenchuy-mn0 ~]$ beeline
+Beeline version 1.1.0-cdh5.16.1 by Apache Hive
+beeline> !connect jdbc:hive2://rakenchuy-mn0.northcentralus.cloudapp.azure.com:10000/default;principal=hive/rakenchuy-mn0.northcentralus.cloudapp.azure.com@CHUY.COM;ssl=true;
+scan complete in 2ms
+Connecting to jdbc:hive2://rakenchuy-mn0.northcentralus.cloudapp.azure.com:10000/default;principal=hive/rakenchuy-mn0.northcentralus.cloudapp.azure.com@CHUY.COM;ssl=true;
+Connected to: Apache Hive (version 1.1.0-cdh5.16.1)
+Driver: Hive JDBC (version 1.1.0-cdh5.16.1)
+Transaction isolation: TRANSACTION_REPEATABLE_READ
+0: jdbc:hive2://rakenchuy-mn0.northcentralus.> select * from table1;
+Error: Error while compiling statement: FAILED: SemanticException No valid privileges
+ User user2 does not have privileges for QUERY
+ The required privileges: Server=server1->Db=default->Table=table1->Column=age->action=select->grantOption=false; (state=42000,code=40000)
+0: jdbc:hive2://rakenchuy-mn0.northcentralus.> select * from table2;
++-----------------+----------------+-------------+--+
+|  table2.height  | table2.weight  | table2.age  |
++-----------------+----------------+-------------+--+
+| 1.78m,95kg,46   | NULL           | NULL        |
+| 1.84m,110kg,36  | NULL           | NULL        |
++-----------------+----------------+-------------+--+
+2 rows selected (0.358 seconds)
+0: jdbc:hive2://rakenchuy-mn0.northcentralus.> 
+
+
+
+
+
+
+
