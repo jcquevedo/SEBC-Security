@@ -38,9 +38,6 @@ includedir /etc/krb5.conf.d/
 # .example.com = EXAMPLE.COM
 # example.com = EXAMPLE.COM
 
-[jquevedo@server1 ~]$ /var/kerberos/krb5kdc
--bash: /var/kerberos/krb5kdc: No such file or directory
-[jquevedo@server1 ~]$ 
 
 
 NO SSSD
