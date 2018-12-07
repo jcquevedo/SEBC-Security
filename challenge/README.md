@@ -7,22 +7,21 @@
 - The data for each line of business will be encrypted in HDFS
 - Create all the Sentry SQL you need to restrict access (you can name the groups, databases, roles, etc. whatever you want provided it is clear what each represents)
 
-- create role finance_managers;
-- create role finance_analysts;
-- create role HR_managers;
-- create role HR_analysts;
-- grant role finance_managers to group finance_managers;
-- grant role HR_managers to group HR_managers;
-- grant role finance_analysts to group finance_analysts;
-- grant role HR_analysts to group HR_analysts;
-- grant all on finance_managers to role finance_managers;
-- grant all on HR_managers to role HR_managers;
-- grant select on database finance_analysts to role finance_managers;
-- grant select on database hr_analysts to role hr_analysts;
-
-
+-- create role finance_managers;
+-- create role finance_analysts;
+-- create role HR_managers;
+-- create role HR_analysts;
+-- grant role finance_managers to group finance_managers;
+-- grant role HR_managers to group HR_managers;
+-- grant role finance_analysts to group finance_analysts;
+-- grant role HR_analysts to group HR_analysts;
+-- grant all on finance_managers to role finance_managers;
+-- grant all on HR_managers to role HR_managers;
+-- grant select on database finance_analysts to role finance_managers;
+-- grant select on database hr_analysts to role hr_analysts;
 
 - Describe what is required to ensure data is encrypted and ensure managers and analysts can read data from HDFS and Hive
+-- You need to enable Transparent Data At Rest Encryption, then create an encryption zone and create the tables there. In case you already have the data, you need to rename the folders, re create the folders and then copy the data back to its original folders with -nocrccheck and -update in order to encrypt the data as is being copied. 
 
 - Describe the capabilities of Navigator Audit, Lineage, and Metadata. What is it useful for?
 Navigator Audit is very useful to know what the users are doing or trying to do, since it logs every single action the clients request and/or perform.
