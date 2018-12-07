@@ -6,15 +6,19 @@
 - Analysts can only read data on their line of business database
 - The data for each line of business will be encrypted in HDFS
 - Create all the Sentry SQL you need to restrict access (you can name the groups, databases, roles, etc. whatever you want provided it is clear what each represents)
-create role finance_managers;
-create role finance_analysts;
-create role HR_managers;
-create role HR_analysts;
-grant role managers to group managers;
-grant role analysts to group analysts;
-grant all on database managers to role managers;
-grant select on database analysts to role managers;
-grant select on database analysts to role analysts;
+
+- create role finance_managers;
+- create role finance_analysts;
+- create role HR_managers;
+- create role HR_analysts;
+- grant role finance_managers to group finance_managers;
+- grant role HR_managers to group HR_managers;
+- grant role finance_analysts to group finance_analysts;
+- grant role HR_analysts to group HR_analysts;
+- grant all on finance_managers to role finance_managers;
+- grant all on HR_managers to role HR_managers;
+- grant select on database finance_analysts to role finance_managers;
+- grant select on database hr_analysts to role hr_analysts;
 
 
 
