@@ -1,0 +1,7 @@
+NO Kerberos
+[jquevedo@quevedo-mn0 ~]$ kinit
+-bash: kinit: command not found
+
+NO SSSD
+[jquevedo@quevedo-mn0 ~]$ rpm -qa |grep sssd
+[jquevedo@quevedo-mn0 ~]$ 
