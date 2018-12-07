@@ -1,7 +1,26 @@
 NO Kerberos
 [jquevedo@quevedo-mn0 ~]$ kinit
 -bash: kinit: command not found
+[jquevedo@quevedo-dn0 ~]$ kinit
+-bash: kinit: command not found
+[jquevedo@quevedo-dn1 ~]$ kinit
+-bash: kinit: command not found
+[jquevedo@quevedo-dn2 ~]$ kinit
+-bash: kinit: command not found
+[jquevedo@quevedo-dn3 ~]$ kinit
+-bash: kinit: command not found
+
+
+
 
 NO SSSD
 [jquevedo@quevedo-mn0 ~]$ rpm -qa |grep sssd
 [jquevedo@quevedo-mn0 ~]$ 
+[jquevedo@quevedo-dn0 ~]$ rpm -qa |grep sssd
+[jquevedo@quevedo-dn0 ~]$ 
+[jquevedo@quevedo-dn1 ~]$ rpm -qa |grep sssd
+[jquevedo@quevedo-dn1 ~]$ 
+[jquevedo@quevedo-dn2 ~]$ rpm -qa |grep sssd
+[jquevedo@quevedo-dn2 ~]$ 
+[jquevedo@quevedo-dn3 ~]$ rpm -qa |grep sssd
+[jquevedo@quevedo-dn3 ~]$ 
