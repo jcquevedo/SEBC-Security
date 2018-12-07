@@ -31,4 +31,18 @@ part of the files metadata in a safe way since user hdfs doesn't have access to 
 For production environments, cloudera recommends 2 or more redundant enterprise keyStores.
 
 
+== Bonus Question ==
+Imagine you have a customer with 40 TB of data in /user/hive/warehouse. 
+HDFS Encryption was not enabled and a customer is now interested in encrypting all 
+data under /user/hive/warehouse. Describe what steps would you take to encrypt the data. 
+What would you and/or the customer need to do to ensure that encryption of all data is 
+posslbe? Be as detailed in your response.
 
+I would first rename the /user/hive/ directory to /user/hive_old/ with command
+hdfs dfs -mv '/user/hive' '/user/hive_old', then I would make the folder again with
+command hdfs dfs -mkdir /user/hive and give permissions with command
+hdfs dfs -chown hive:dupergroup /user/hive and then activate encryption zone
+to /user/hive and then use distcp -nocrccheck -update to get the entire data on
+the recently encrypted zone /user/hive and it will all be encrypted as files are
+being copied. (I can't tell if these are the exact commands since I no longer 
+have a cluster to test on, and Don't have Data at Rest Encryption)
